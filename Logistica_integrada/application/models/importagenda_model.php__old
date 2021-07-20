@@ -1,0 +1,198 @@
+<?php
+class Importagenda_Model extends CI_Model {
+
+	function __construct() {
+		parent::__construct();
+		$this -> load -> database();
+		$this->load->library('Spreadsheet_Excel_Reader');
+
+	}
+
+	function checkCodEbs ($linha, $ordem){
+		
+		/*$sql = "SELECT COD_AGENDAMENTO FROM ESM_LOGISTICA_AGENDAMENTO
+				WHERE 
+					LINHA = ".$linha." 
+				AND
+					ORDEM = '".$ordem."'
+				AND 
+					STATUS <> 'C'					
+				";		
+		
+		$query = $this->db->query($sql);
+		
+		return $query->num_rows();*/	
+		
+	}
+	
+	function importar($files, $parametros){
+	
+		$filial = $parametros['filial'];
+		$mat_agendador =  $this->session->userdata('idRegister');
+		$data_atual =  date('Y-m-d');
+		
+		
+		
+		$this->db->trans_start();
+		
+		$data = new Spreadsheet_Excel_Reader($_FILES['arquivo']['tmp_name']);
+		
+		if($data->rowcount($sheet_index=0) == 0){
+			//echo "não tem";
+			die('não tem nada');							
+			$retorno = false;			
+		} else {
+			//echo "tem";
+			for( $i=4; $i <= $data->rowcount($sheet_index=0); $i++ ){
+							
+				$dat = explode( "/", $data->val($i, 10));
+				//$datF= explode("/", $dat[1]);
+				$data_agendamento = $dat[2].'-'.$dat[0].'-'.$dat[1];
+							
+				$linha = $data->val($i, 2);
+				
+				$ordem = $data->val($i, 3);
+			
+				$var1 = $this->checkCodEbs($linha, $ordem);				
+					
+				print_r ($data_agendamento);
+				/*print_r("data->val(1,1)"." - " .$data->val(1,1)."  -  ".$data->val($i,1)."<br>");
+				print_r("data->val(3,1)"." - " .$data->val(3,1)."  -  ".$data->val($i,1)."<br>");
+				print_r("data->val(3,2)"." - " .$data->val(3,2)."  -  ".$data->val($i,2)."<br>");
+				print_r("data->val(3,3)"." - " .$data->val(3,3)."  -  ".$data->val($i,3)."<br>");
+				print_r("data->val(3,4)"." - " .$data->val(3,4)."  -  ".$data->val($i,4)."<br>");
+				print_r("data->val(3,5)"." - " .$data->val(3,5)."  -  ".$data->val($i,5)."<br>");
+				print_r("data->val(3,6)"." - " .$data->val(3,6)."  -  ".$data->val($i,6)."<br>");
+				print_r("data->val(3,7)"." - " .$data->val(3,7)."  -  ".$data->val($i,7)."<br>");
+				print_r("data->val(3,8)"." - " .$data->val(3,8)."  -  ".$data->val($i,8)."<br>");
+				print_r("data->val(3,9)"." - " .$data->val(3,9)."  -  ".$data->val($i,9)."<br>");
+				print_r("data->val(3,10)"." - " .$data->val(3,10)."  -  ".$data->val($i,10)."<br>");
+				print_r("data->val(3,11)"." - " .$data->val(3,11)."  -  ".$data->val($i,11)."<br>");*/
+				//print_r("cod_carreta"." - ".$COD_CARRETA);
+				
+			
+				//print_r("cod_carreta"." - ".$COD_CARRETA);
+					
+							
+				if($var1 == 0){
+				$COD_AGENDAMENTO = $this->db->query('SELECT ESM_LOGISTICA_AGENDAMENTO_SEQ.NEXTVAL COD_AGENDAMENTO FROM DUAL')->result_array();
+				$COD_CARRETA = $this->db->query('SELECT SEQ_ESM_LOGISTICA_CARRETA_ITEM.NEXTVAL COD_CARRETA FROM DUAL')->result_array();
+				if($COD_CARRETA[0]['COD_CARRETA']>=9)
+				{
+					$VALOR = '0'.$COD_CARRETA[0]['COD_CARRETA'];
+				}
+				else
+				{
+					$VALOR = $COD_CARRETA[0]['COD_CARRETA'];
+				}
+					
+					$sql="INSERT INTO ESMALTEC.ESM_LOGISTICA_AGENDAMENTO
+		                 (
+						 DATA_CADASTRO, 
+						 COD_AGENDAMENTO,
+						 CARRETA,
+						  LINHA,
+						  ORDEM,
+						  OC_CLIENTE,
+						  CLIENTE, 
+						  ENDERECO, 
+						  COD_ITEM,              
+		                  DEN_ITEM,        
+		                  QUANTIDADE,  
+						 DATA_AGENDAMENTO,
+						 LOCALIZACAO,
+		                  FILIAL, 
+		                  STATUS
+						  	                  
+		                  ) 
+	            	VALUES 
+	                    (TO_DATE('".date("Y-m-d")."','YYYY-MM-DD'),
+						".$COD_AGENDAMENTO[0]['COD_AGENDAMENTO'].",
+						'".$data->val($i,1)."-".$VALOR."',
+						'".$data->val($i,2)."',
+						'".$data->val($i,3)."',
+						'".$data->val($i,4)."',
+						'".$data->val($i,5)."',
+						'".$data->val($i,6)."',
+						'".$data->val($i,7)."',
+						'".$data->val($i,8)."',
+						'".$data->val($i,9)."',
+						to_date('".$data_agendamento."','YYYY-MM-DD'),
+						'LOGISTICA',
+						'".$filial."',
+						'A'
+						)";
+								
+					/*$sql="INSERT INTO ESMALTEC.ESM_LOGISTICA_AGENDAMENTO
+		                 (DATA_CADASTRO,
+						  COD_AGENDAMENTO,                                
+		                  ORDEM,
+						  LINHA,
+						  OC_CLIENTE,                 
+		                  CLIENTE,          
+		                  ENDERECO,              
+		                  COD_ITEM,              
+		                  DEN_ITEM,        
+		                  QUANTIDADE,                    
+		                  DATA_AGENDAMENTO,
+						  LOCALIZACAO,
+		                  FILIAL, 
+		                  STATUS,
+						  CARRETA	                  
+		                  ) 
+	            	VALUES 
+	                    (TO_DATE('".date("Y-m-d")."','YYYY-MM-DD'),
+						".$COD_AGENDAMENTO[0]['COD_AGENDAMENTO'].",
+						'".$data->val($i,5)."',
+						'".$data->val($i,2)."',
+						'".$data->val($i,3)."',
+						'".$data->val($i,6)."',
+						'".$data->val($i,7)."',
+						'".$data->val($i,8)."',
+						'".$data->val($i,9)."',
+						'".$data->val($i,10)."',
+						to_date('".$data_agendamento."','YYYY-MM-DD'),
+						'LOGISTICA',
+						'".$filial."',
+						'A',
+						'".$data->val($i,1)."-".$VALOR."')";*/
+						/*print_r("DATA_CADASTRO,"." - ".date("Y-m-d")."<br />");
+				print_r("COD_AGENDAMENTO,"." - " .$COD_AGENDAMENTO[0]['COD_AGENDAMENTO']."<br />");                print_r("CARRETA"." - ".$data->val($i,1)."-".$VALOR."<br />");
+				print_r("LINHA,"." - ".$data->val($i,2)."<br />");
+				print_r("ORDEM,"." - ".$data->val($i,3));
+				print_r("OC_CLIENTE,"." - ".$data->val($i,4)."<br />");
+				print_r("CLIENTE,"." - ".$data->val($i,5)."<br />");          
+		        print_r("ENDERECO,"." - ".$data->val($i,6)."<br />");              
+		        print_r("COD_ITEM,"." - ".$data->val($i,7)."<br />");              
+		        print_r("DEN_ITEM,"." - ".$data->val($i,8)."<br />");        
+		        print_r("QUANTIDADE,"." - ".$data->val($i,9)."<br />");                    
+		        print_r("DATA_AGENDAMENTO,"." - ".$data_agendamento)."<br />";
+				print_r("LOCALIZACAO,"." - "."LOGISTICA"."<br />");
+		        print_r("FILIAL,"." - ".$filial."<br />"); 
+		        print_r("STATUS,"." - "."A"."<br />");*/
+					
+						
+										
+					$this->db->query($sql);		
+					
+					$this->db->query("INSERT INTO ESM_LOGISTICA_ACOES_AGEND(COD_AGENDAMENTO, NUM_MATRICULA, DATA_ACAO, ACAO) VALUES(".$COD_AGENDAMENTO[0]['COD_AGENDAMENTO'].",".$this->session->userdata('idRegister').", sysdate ,'AGENDAMENTO') ");
+				}	
+			
+			}
+					
+			$this->db->trans_complete();
+			
+			if ($this->db->trans_status() === FALSE) {
+				$retorno = false;
+			} else {
+				$retorno = true;
+			}
+			
+		}
+		
+		//die();
+		
+		return $retorno;
+	}
+
+}

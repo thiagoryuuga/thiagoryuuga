@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>Classic Demo</TITLE>
+<Style type="text/css">
+.plain {height:20px; border:1px solid gray; font:9pt arial; text-align:center;  vertical-align:middle;}
+.vbtn {height:20px; width:18px; font:bold 10pt arial; border:2px solid silver;  vertical-align:middle;}
+.vsel {height:18px; width:60px; border:1px solid gray; font:9pt arial; text-align:center; vertical-align:middle;}
+</Style>
+</HEAD>
+<BODY bgcolor="#dcdcdc">
+
+<link rel='stylesheet' type='text/css' href='../../../chamados_2007/popcalendar/demos/demo.css'>
+<BR>
+
+<FORM name="demoform" onSubmit="alert('form submitted');">
+<TABLE align=center width=600 border=0 >
+  <TR>
+    <TD align=center colspan=2 nowrap>
+      <H2>PopCalendarXP 9.0</H2><BR><BR>
+	</TD></TR>
+  <TR>
+    <TD align="right" class="toright" width="35%" nowrap>Arrival On: </TD>
+    <TD class="toleft" nowrap>
+	<select name="arrDate_day" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-');for(var i=1;i<=31;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="arrDate_mon" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-');for(var i=1;i<=12;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="arrDate_year" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-');for(var i=1980;i<=2030;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> <INPUT name="popcal" onClick="if(this.blur)this.blur();var fm=this.form;if(self.gfPop)gfPop.fPopCalendar(fm.arrDate,null,null,fm.arrDate_year);" type="button" value="..." class="vbtn">
+	<input name="arrDate" type="hidden" value="">
+	</TD>
+  </TR>
+
+  <TR>
+    <TD align="right" class="toright" width="35%" nowrap>Depart On: </TD>
+    <TD class="toleft" nowrap>
+	<select name="deptDate_day" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-');for(var i=1;i<=31;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="deptDate_mon" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-');for(var i=1;i<=12;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="deptDate_year" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-');for(var i=1980;i<=2030;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> <INPUT name="popcal" onClick="if(this.blur)this.blur();var fm=this.form;if(self.gfPop)gfPop.fPopCalendar(fm.deptDate,null,null,fm.deptDate_year);" type="button" value="..." class="vbtn">
+	<input name="deptDate" type="hidden" value="">
+	</TD>
+  </TR>
+</TABLE>
+</FORM>
+
+
+<UL>
+NOTE:
+<LI>This demo shows you how to coordinate the date picker with 3 dropdowns per date.</LI>
+<LI>You need a hidden input field to store the selected date, and use the name of it as a prefix to name the 3 dropdowns.</LI>
+<LI>This demo uses 2 plugins - fAfterSelect and updateHidden - which can be found in plugins.js.</LI>
+</UL>
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2005 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+
+<!--  PopCalendar(tag name and id must match) Tags should sit at the page bottom -->
+<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="Classic/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px;">
+</iframe>
+</BODY>
+</HTML>
+

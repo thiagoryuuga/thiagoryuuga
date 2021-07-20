@@ -1,0 +1,6 @@
+{
+    "require": {
+        "firebase/php-jwt": "^5.0",
+        "vlucas/phpdotenv": "^2.4"
+    }
+}

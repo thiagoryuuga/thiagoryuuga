@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* RESET */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+form,fieldset,input,textarea,p,blockquote,th,td {
+    padding: 0;
+    margin: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+fieldset,img {
+    border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-weight: normal;
+    font-style: normal;
+}
+ol,ul {
+    list-style: none;
+}
+caption,th {
+    text-align: left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border: 0;
+}
+
+/* INICIO*/
+
+div.navigation {   margin:0 10px 0 20px; border-radius: 5px; }
+
+div.espacamento { height:80px; }
+
+div.conteudo{
+	height:127px;
+	background:url(../images/head_bg.gif) repeat-x;
+	
+}
+
+div.logo{
+	height:115px;
+	background:url(../images/logo.png) no-repeat;
+}
+
+div.icon-menu{
+	height:110px;
+	margin-top:-110px;
+	margin-left:500px;
+}
+
+div.icon-menu img:hover{
+	background:url(../images/icons-menu/hover/sistema-hover.png);
+}
+
+

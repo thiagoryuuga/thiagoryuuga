@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+/* RESET */
+
+html, body {height:100%; margin:0; padding:0;}
+
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre, form,fieldset,input,textarea,p,blockquote,th,td { padding: 0; margin: 0; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+fieldset,img { border: 0; }
+
+address,caption,cite,code,dfn,em,strong,th,var { font-weight: normal; font-style: normal; }
+
+ol,ul { list-style: none; }
+
+caption,th { text-align: left; }
+
+h1,h2,h3,h4,h5,h6 { font-weight: normal; font-size: 100%; }
+
+q:before,q:after { content:''; }
+
+abbr,acronym { border: 0; }
+
+/* CONTEUDO GERAL */
+
+div.tudo{ min-height:45%; position:relative; overflow:hidden; width:100%;}
+
+div#corpo{ min-height:92.7%;}
+/* FORMATAÇÃO DO CABEÇALHO */
+
+
+/* tolltip  */
+
+.tooltip.bottom {
+	background:url(/tools/img/tooltip/black_arrow_bottom.png);
+	padding-top:40px;
+	height:55px;
+}
+
+.tooltip.bottom {
+	background:url(/tools/img/tooltip/black_arrow_bottom.png);
+}
+
+div#add-del {  }
+
+/* fim tooltup*/
+
+div.header { background:url(../images/head_bg.gif) repeat-x; height:130px }
+
+div.header div.logo-img { background:url(../images/logo.png) no-repeat; height:130px; }
+
+/* FORMATAÇÃO DO CONTEUDO */
+
+div.titulo-menu span { float:left; font:20px Arial; font-weight:normal; line-height:35px; margin:0; padding:0;  white-space:nowrap; }
+
+div.titulo-menu { background:url(../images/bg_title.png) repeat-x; color: #fff; height:35px; left: 0; padding: 0 5px; position: relative; margin: 0 10px; min-height: 1px; top: 0;}
+
+div.titulo-menu span.titulo-menu-left { background:url(images/bg_title_left-.png) no-repeat; display:block; left:-10px; height:35px; overflow:hidden; position:absolute; top:0; width:10px; }
+
+div.titulo-menu span.titulo-menu-right { background:url(../images/bg_title_right.png) no-repeat; display: block; height:35px; overflow: hidden; position: absolute; right: -10px; top: 0; width:10px }
+
+div.inputs, div.checkbox, div.radio, div.anexo-arquivos, div.select, div.text-area, { padding:0 0 5px 0; }
+
+div.buttons { padding:0 0 15px 0; }
+
+div.formulario { background:#E7F3F8; height:100%; }
+
+div.datatables {}
+
+div.form{ margin:10px;}
+
+div.formulario div { margin:0 10px 10px 10px;  }
+
+div.formulario td.prim-coluna { padding:0 30px 0 0; }
+
+div.datatables div {   }
+
+label {  font: 13px Arial; font-weight: bold; line-height: 22px; width: 105px; }
+
+input[type=text]{ height:20px;  }
+
+textarea { font:12px Arial; }
+
+button[type=submit] { color:#FFF; background:transparent url(../images/entrar-btn.png); border: none; font:12px Arial; font-weight:bold; height:21px; text-transform:uppercase; width:94px; margin:10px 10px 0 0; cursor:pointer; }
+
+button[type=submit]:nth-of-type(1) { color:#FFF; background:transparent url(../images/entrar-btn.png); border: none; font:12px Arial; font-weight:bold; height:21px; text-transform:uppercase; width:94px; margin:10px 10px 10px 0; }
+
+button[type=button] { color:#FFF; background:transparent url(../images/entrar-btn.png) no-repeat; border: none; font:12px Arial; font-weight:bold; height:21px; text-transform:uppercase; width:94px; cursor:pointer; }
+
+div.dataTables_info, div.dataTables_paginate  {  font:12px Arial; }
+
+/* FORMATAÇÃO DO RODAPÉ */
+
+div.rodape { background:url(../images/head_bg.gif) repeat-x; bottom:0; height:50px; position:relative; width:100%; clear:both; }
+
+div.rodape p { color:#FFF; font:10px Verdana; margin:8px 0 0 0 }
+
+div.rodape div { background:url(../images/nome_esmaltec.png) no-repeat; height:20px; margin:5px 0 0 48% }
+
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }

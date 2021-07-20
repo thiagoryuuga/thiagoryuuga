@@ -1,0 +1,10 @@
+Classes/class.Oracle.php
+Classes/class.OTRS.php
+**/.ENV
+**/.env
+.env
+.ENV
+.DS_Store
+**/.DS_Store
+uploads/*
+!uploads/.gitkeep

@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+
+#menu a
+{
+	line-height:20px;
+	color:#F00;
+}
+#menu
+{
+	background:#000;
+	
+
+}

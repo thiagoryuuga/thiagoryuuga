@@ -1,0 +1,1 @@
+type c:\sisetiq\impressao.txt > LPT1
